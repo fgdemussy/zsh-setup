@@ -32,45 +32,19 @@ install_plugins() {
     sed -i"_postinstall" '/^plugins=/N;s/(git)/(git zsh-navigation-tools zsh-syntax-highlighting zsh-autosuggestions)/' ~/.zshrc
 }
 
-command_exists() {
-    command -v "$@" >/dev/null 2>&1
-}
-
-fmt_code() {
-    # shellcheck disable=SC2016 # backtic in single-quote
-    printf '`\033[38;5;247m%s%s`\n' "$*" "$RESET"
-}
-
 main() {
     setup_color
 
-    if ! command_exists zsh; then
-        echo "${YELLOW}Zsh is not installed.${RESET} Please install zsh first."
-        exit 1
-    fi
-
-    if [ -d "$ZSH" ]; then
-        echo "${YELLOW}The \$ZSH folder already exists ($ZSH).${RESET}"
-        cat <<EOF
-
-You ran the installer with the \$ZSH setting or the \$ZSH variable is
-exported. You have 3 options:
-
-1. Unset the ZSH variable when calling the installer:
-   $(fmt_code "ZSH= sh install.sh")
-2. Install Oh My Zsh to a directory that doesn't exist yet:
-   $(fmt_code "ZSH=path/to/new/ohmyzsh/folder sh install.sh")
-3. (Caution) If the folder doesn't contain important information,
-   you can just remove it with $(fmt_code "rm -r $ZSH")
-
-EOF
-        exit 1
-    fi
-
     install_zsh
-    vim_syntax_on
-    install_plugins
-    zsh
+
+    if [[ $? -eq 0 ]]; then
+        vim_syntax_on
+        install_plugins
+        zsh
+    else
+        echo "${YELLOW}Installing Oh-my-zsh failed."
+        exit 1
+    fi
 }
 
 main "$@"
