@@ -8,6 +8,7 @@ Includes productivity plugins:
 - [zsh-syntax-highlighting](https://github.com/zsh-users/zsh-syntax-highlighting.git)
 
 ## Usage
-`git clone https://github.com/fgdemussy/zsh-setup`
-`cd zsh-setup`
-`./zsh-setup.sh`
+Clone this repo and run `zsh-setup.sh` to install *oh-my-zsh* and load plugins into it.
+1. `git clone https://github.com/fgdemussy/zsh-setup`
+2. `cd zsh-setup`
+3. `./zsh-setup.sh`
