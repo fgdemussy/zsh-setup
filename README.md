@@ -1,5 +1,5 @@
 # zsh-setup
-Zsh installation script.
+Oh-my-zsh installation script.
 
 Includes productivity plugins:
 - [git](https://github.com/ohmyzsh/ohmyzsh/tree/master/plugins/git)
