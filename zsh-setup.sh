@@ -29,10 +29,7 @@ install_zsh() {
 install_plugins() {
     git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
     git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-}
-
-copy_zshrc() {
-    cp .zshrc ~/.zshrc
+    sed -i"_postinstall" '/^plugins=/N;s/(git)/(git zsh-navigation-tools zsh-syntax-highlighting zsh-autosuggestions)/' ~/.zshrc
 }
 
 command_exists() {
@@ -73,8 +70,7 @@ EOF
     install_zsh
     vim_syntax_on
     install_plugins
-    copy_zshrc
-    source ~/.zshrc
+    zsh
 }
 
 main "$@"
